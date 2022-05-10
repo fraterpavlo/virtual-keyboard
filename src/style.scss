@@ -44,7 +44,16 @@
   cursor: pointer;
   transition: all 0.2s linear;
 
+  &:hover {
+    background: #373535;
+  }
+
   &:active {
+    border: none;
+  }
+  // &:active,
+  &.active,
+  &.active-lock {
     // transform: scale(0.98);
     // background: #9f9c91;
     border: 1px outset rgb(0, 255, 38);

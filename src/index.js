@@ -36,13 +36,29 @@ class Keyboard {
     keyboardContainer: null,
     keysContainer: null,
     keys: [],
+    specialKeys: [],
+    notSpecialKeys: [],
     targetTextArea: null,
   };
 
     eventHandlers = {
-        oninput: null,
-        onclose: null
+      onBackspaceHandler: this.onBackspaceListener.bind(this),
+      onTabHandler: this.onTabListener.bind(this),
+      onCapsLockHandler: this.onCapsLockListener.bind(this),
+      onEnterHandler: this.onEnterListener.bind(this),
+      onShiftHandler: this.onShiftListener.bind(this),
+      onControlHandler: this.onControlListener.bind(this),
+      onMetaLeftHandler: this.onMetaLeftListener.bind(this),
+      onAltHandler: this.onAltListener.bind(this),
+      onClickTextInputHandler: this.onClickTextInputListener.bind(this),
+      onMousedownHandler: this.onMousedownListener.bind(this),
+      // onHandler: this.onListener.bind(this),
+
     };
+
+    functions = {
+      setTextContentForKey: this.setTextContentForKey.bind(this),
+    }
 
     properties = {
         // textAreaValue: "",
@@ -75,8 +91,6 @@ class Keyboard {
     this.elements.keysContainer.classList.add("keyboard__keys", "keys-container");
     this.elements.targetTextArea = document.getElementById(textareaId);
 
-    // this.elements.keys = this.elements.keysContainer.querySelectorAll(".keys-container_key");
-
     // Setup properties
     // this.properties.textAreaValue = this.elements.targetTextArea.value;
 
@@ -85,7 +99,24 @@ class Keyboard {
     this.elements.keyboardContainer.appendChild(this.elements.keysContainer);
     document.body.appendChild(this.elements.keyboardContainer);
     this.elements.keysContainer.appendChild(createdKeys);
+
+    //Add keys in this
+    this.elements.keys = this.elements.keysContainer.querySelectorAll(".keys-container_key");
+    this.elements.specialKeys = this.elements.keysContainer.querySelectorAll(".key_special");
+    this.elements.notSpecialKeys = this.elements.keysContainer.querySelectorAll(".key_not-special");
+
+    //Add physical keyboard event for window
   }
+
+  // isSpecialKey (keyElement) {
+  //   const keysData = this.data.keysDataArr; //--
+  //   const keyCode = keyElement.getAttribute("data-code"); //--
+  //   const keyDataObj = keysData.find(dataObj => dataObj.code === keyCode); //--
+  //   const keyDataObj = getKeyDta(keyElement);
+  //   const isSpecialKey = keyDataObj.isSpecial;
+
+  //   return isSpecialKey;
+  // }
 
   createKeys (keysDataArr, lineBreakArr) {
     const fragment = document.createDocumentFragment();
@@ -93,22 +124,25 @@ class Keyboard {
     keysDataArr.forEach(keyObj => {
       const keyElement = document.createElement("button");
       const insertLineBreak = lineBreakArr.indexOf(keyObj.code) !== -1;
+      const isSpecialKey = keyObj.isSpecial;
       
       // Add attributes/classes
       keyElement.setAttribute("data-code", keyObj.code);
       keyElement.classList.add("keyboard__key", "key", `key_${keyObj.size}`);
 
+      isSpecialKey
+        ? keyElement.classList.add("key_special")
+        : keyElement.classList.add("key_not-special")
+      
+      // Add texContent 
       this.setTextContentForKey(keyElement);
+      // Add Listener 
       this.setListenerForKey(keyElement);
 
-      // if (insertLineBreak) {
-      //   keyElement.style.clear = "right";
-      // }
-
+      //Add to DOM
       fragment.appendChild(keyElement);
 
       if (insertLineBreak) {
-          // fragment.appendChild(document.createElement("br"));
           const lineBreakElement = document.createElement("div");
           lineBreakElement.classList.add("line-break-item");
           fragment.appendChild(lineBreakElement);
@@ -168,18 +202,50 @@ class Keyboard {
 
   setListenerForKey (keyElement) { 
     const keyData = this.getKeyData(keyElement);
-    if (keyData.special) {
+    if (keyData.isSpecial) {
       switch(keyData.code) {
 
         case "Backspace":
-          keyElement.addEventListener("click", () => {
-            this.elements.targetTextArea.value = this.elements.targetTextArea.value.slice(0, -1);
+          keyElement.addEventListener("click", this.eventHandlers.onBackspaceHandler);
+        break;
 
-            this.elements.targetTextArea.value = this.elements.targetTextArea.value + "12345";
-          })
+        case "Tab":
+          keyElement.addEventListener("click", this.eventHandlers.onTabHandler);
+        break;
+
+        case "CapsLock":
+          keyElement.addEventListener("click", this.eventHandlers.onCapsLockHandler);
+        break;
+
+        case "Enter":
+          keyElement.addEventListener("click", this.eventHandlers.onEnterHandler);
+        break;
+
+        case "ShiftLeft":
+        case "ShiftRight":
+          keyElement.addEventListener("dblclick", this.eventHandlers.onShiftHandler);
+        break;
+
+        case "ControlLeft":
+        case "ControlRight":
+          keyElement.addEventListener("dblclick", this.eventHandlers.onControlHandler);
+        break;
+
+        case "MetaLeft":
+          keyElement.addEventListener("dblclick", this.eventHandlers.onMetaLeftHandler);
+        break;
+
+        case "AltLeft":
+        case "AltRight":
+          keyElement.addEventListener("dblclick", this.eventHandlers.onAltHandler);
+        break;
       }
+    } else {
+      keyElement.addEventListener("click", this.eventHandlers.onClickTextInputHandler);
     }
 
+    // Default listener for any key
+    keyElement.addEventListener("mousedown", this.eventHandlers.onMousedownHandler)
   }
 
   getKeyData (keyElement) {
@@ -190,6 +256,91 @@ class Keyboard {
 
     return keyData;
   }
+
+  onBackspaceListener() {
+    this.elements.targetTextArea.value = this.elements.targetTextArea.value.slice(0, -1);
+    // this.elements.targetTextArea.value = this.elements.targetTextArea.value + "12345";
+    // console.log(this.elements.targetTextArea.value);
+  }
+
+  onTabListener () {
+    this.elements.targetTextArea.value += "\t";
+    // console.log(this.elements.targetTextArea.value);
+  }
+
+  onCapsLockListener (event) {
+    this.properties.capsLock = !this.properties.capsLock;
+    this.elements.notSpecialKeys.forEach(this.functions.setTextContentForKey);
+
+    this.properties.capsLock 
+      ? event.currentTarget.classList.add("active-lock") 
+      : event.currentTarget.classList.remove("active-lock");
+  }
+
+  onEnterListener () {
+    this.elements.targetTextArea.value += "\n";
+    // console.log(this.elements.targetTextArea.value);
+  }
+
+  onShiftListener (event) {
+    this.properties.shift = !this.properties.shift;
+    this.elements.notSpecialKeys.forEach(this.functions.setTextContentForKey);
+
+    const shiftKeys = this.elements.keysContainer.querySelectorAll(".key[data-code=ShiftLeft], .key[data-code=ShiftRight]");
+
+    this.properties.shift 
+      ? event.currentTarget.classList.add("active-lock") 
+      : shiftKeys.forEach(el => el.classList.remove("active-lock"));
+  }
+
+  onControlListener (event) {
+    this.properties.ctrl = !this.properties.ctrl;
+    // this.elements.notSpecialKeys.forEach(this.functions.setTextContentForKey);
+
+    const ctrlKeys = this.elements.keysContainer.querySelectorAll(".key[data-code=ControlLeft], .key[data-code=ControlRight]");
+
+    this.properties.ctrl 
+      ? event.currentTarget.classList.add("active-lock") 
+      : ctrlKeys.forEach(el => el.classList.remove("active-lock"));
+  }
+
+  onMetaLeftListener (event) {
+    event.currentTarget.classList.toggle("active-lock");
+  }
+
+  onAltListener (event) {
+    this.properties.alt = !this.properties.alt;
+    // this.elements.notSpecialKeys.forEach(this.functions.setTextContentForKey);
+
+    const altKeys = this.elements.keysContainer.querySelectorAll(".key[data-code=AltLeft], .key[data-code=AltRight]");
+
+    this.properties.alt 
+      ? event.currentTarget.classList.add("active-lock") 
+      : altKeys.forEach(el => el.classList.remove("active-lock"));
+  }
+
+  onClickTextInputListener (event) {
+    this.elements.targetTextArea.value += event.currentTarget.textContent;
+  }
+
+  onMousedownListener(event) {
+    const currentTargetEl = event.currentTarget;
+    currentTargetEl.classList.add("active");
+
+    currentTargetEl.addEventListener("mouseover", toggleActiveClass);
+    currentTargetEl.addEventListener("mouseout", toggleActiveClass);
+
+    this.elements.keyboardContainer.addEventListener("mouseup", () => {
+      currentTargetEl.classList.remove("active");
+      currentTargetEl.removeEventListener("mouseover", toggleActiveClass);
+      currentTargetEl.removeEventListener("mouseout", toggleActiveClass);
+    }, {once: true});
+
+    function toggleActiveClass (e) {
+      e.currentTarget.classList.toggle("active");
+    }
+  }
+
 }
 
 class TextArea {
@@ -212,7 +363,7 @@ class TextArea {
     textAreaElement.classList.add("textarea");
 
     textAreaElement.addEventListener("input", () => {
-      // this.value = textAreaElement.value;
+      this.value = textAreaElement.value;
       console.log(textAreaElement.value);
     })
 
@@ -226,4 +377,4 @@ const textArea = new TextArea("textarea", 5, 50);
 const RssKeyboard = new Keyboard("keyboard", "textarea", keysData, lineBreakLayout);
 
 
-alert("делаю прямо сейчас. осталось повесить обработчики сибытий. если не сложно, проверьте завтра-послезавтра");
+// alert("делаю прямо сейчас. осталось повесить обработчики сибытий. если не сложно, проверьте завтра-послезавтра");

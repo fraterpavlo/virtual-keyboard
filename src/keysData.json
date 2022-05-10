@@ -6,7 +6,7 @@
       "ruKey": "ё",
       "ruShiftKey": "Ё",
       "size": "xs",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Digit1",
@@ -15,7 +15,7 @@
       "ruKey": "1",
       "ruShiftKey": "!",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Digit2",
@@ -24,7 +24,7 @@
       "ruKey": "2",
       "ruShiftKey": "\"",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Digit3",
@@ -33,7 +33,7 @@
       "ruKey": "3",
       "ruShiftKey": "№",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Digit4",
@@ -42,7 +42,7 @@
       "ruKey": "4",
       "ruShiftKey": ";",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Digit5",
@@ -51,7 +51,7 @@
       "ruKey": "5",
       "ruShiftKey": "%",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Digit6",
@@ -60,7 +60,7 @@
       "ruKey": "6",
       "ruShiftKey": ":",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Digit7",
@@ -69,7 +69,7 @@
       "ruKey": "7",
       "ruShiftKey": "?",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Digit8",
@@ -78,7 +78,7 @@
       "ruKey": "8",
       "ruShiftKey": "*",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Digit9",
@@ -87,7 +87,7 @@
       "ruKey": "9",
       "ruShiftKey": "(",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Digit0",
@@ -96,7 +96,7 @@
       "ruKey": "0",
       "ruShiftKey": ")",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Minus",
@@ -105,7 +105,7 @@
       "ruKey": "-",
       "ruShiftKey": "_",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Equal",
@@ -114,7 +114,7 @@
       "ruKey": "=",
       "ruShiftKey": "+",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Backspace",
@@ -123,7 +123,7 @@
       "ruKey": "Backspace",
       "ruShiftKey": "Backspace",
       "size": "xl",
-      "special": true
+      "isSpecial": true
   },
   {
       "code": "Tab",
@@ -132,7 +132,7 @@
       "ruKey": "Tab",
       "ruShiftKey": "Tab",
       "size": "m",
-      "special": true
+      "isSpecial": true
   },
   {
       "code": "KeyQ",
@@ -141,7 +141,7 @@
       "ruKey": "й",
       "ruShiftKey": "Й",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyW",
@@ -150,7 +150,7 @@
       "ruKey": "ц",
       "ruShiftKey": "Ц",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyE",
@@ -159,7 +159,7 @@
       "ruKey": "у",
       "ruShiftKey": "У",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyR",
@@ -168,7 +168,7 @@
       "ruKey": "к",
       "ruShiftKey": "К",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyT",
@@ -177,7 +177,7 @@
       "ruKey": "е",
       "ruShiftKey": "Е",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyY",
@@ -186,7 +186,7 @@
       "ruKey": "н",
       "ruShiftKey": "Н",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyU",
@@ -195,7 +195,7 @@
       "ruKey": "г",
       "ruShiftKey": "Г",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyI",
@@ -204,7 +204,7 @@
       "ruKey": "ш",
       "ruShiftKey": "Ш",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyO",
@@ -213,7 +213,7 @@
       "ruKey": "щ",
       "ruShiftKey": "Щ",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyP",
@@ -222,7 +222,7 @@
       "ruKey": "з",
       "ruShiftKey": "З",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "BracketLeft",
@@ -231,7 +231,7 @@
       "ruKey": "х",
       "ruShiftKey": "Х",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "BracketRight",
@@ -240,7 +240,7 @@
       "ruKey": "ъ",
       "ruShiftKey": "Ъ",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Backslash",
@@ -249,7 +249,7 @@
       "ruKey": "\\",
       "ruShiftKey": "/",
       "size": "m",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "CapsLock",
@@ -258,7 +258,7 @@
       "ruKey": "CapsLock",
       "ruShiftKey": "CapsLock",
       "size": "l",
-      "special": true
+      "isSpecial": true
   },
   {
       "code": "KeyA",
@@ -267,7 +267,7 @@
       "ruKey": "ф",
       "ruShiftKey": "Ф",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyS",
@@ -276,7 +276,7 @@
       "ruKey": "ы",
       "ruShiftKey": "Ы",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyD",
@@ -285,7 +285,7 @@
       "ruKey": "в",
       "ruShiftKey": "В",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyF",
@@ -294,7 +294,7 @@
       "ruKey": "а",
       "ruShiftKey": "А",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyG",
@@ -303,7 +303,7 @@
       "ruKey": "п",
       "ruShiftKey": "П",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyH",
@@ -312,7 +312,7 @@
       "ruKey": "р",
       "ruShiftKey": "Р",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyJ",
@@ -321,7 +321,7 @@
       "ruKey": "о",
       "ruShiftKey": "О",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyK",
@@ -330,7 +330,7 @@
       "ruKey": "л",
       "ruShiftKey": "Л",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyL",
@@ -339,7 +339,7 @@
       "ruKey": "д",
       "ruShiftKey": "Д",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Semicolon",
@@ -348,7 +348,7 @@
       "ruKey": "ж",
       "ruShiftKey": "Ж",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Quote",
@@ -357,7 +357,7 @@
       "ruKey": "э",
       "ruShiftKey": "Э",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Enter",
@@ -366,7 +366,7 @@
       "ruKey": "Enter",
       "ruShiftKey": "Enter",
       "size": "xxl",
-      "special": true
+      "isSpecial": true
   },
   {
       "code": "ShiftLeft",
@@ -375,7 +375,7 @@
       "ruKey": "Shift",
       "ruShiftKey": "Shift",
       "size": "xl",
-      "special": true
+      "isSpecial": true
   },
   {
       "code": "KeyZ",
@@ -384,7 +384,7 @@
       "ruKey": "я",
       "ruShiftKey": "Я",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyX",
@@ -393,7 +393,7 @@
       "ruKey": "ч",
       "ruShiftKey": "Ч",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyC",
@@ -402,7 +402,7 @@
       "ruKey": "с",
       "ruShiftKey": "С",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyV",
@@ -411,7 +411,7 @@
       "ruKey": "м",
       "ruShiftKey": "М",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyB",
@@ -420,7 +420,7 @@
       "ruKey": "и",
       "ruShiftKey": "И",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyN",
@@ -429,7 +429,7 @@
       "ruKey": "т",
       "ruShiftKey": "Т",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "KeyM",
@@ -438,7 +438,7 @@
       "ruKey": "ь",
       "ruShiftKey": "Ь",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Comma",
@@ -447,7 +447,7 @@
       "ruKey": "б",
       "ruShiftKey": "Б",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Period",
@@ -456,7 +456,7 @@
       "ruKey": "ю",
       "ruShiftKey": "Ю",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
       "code": "Slash",
@@ -465,7 +465,7 @@
       "ruKey": ".",
       "ruShiftKey": ",",
       "size": "s",
-      "special": false
+      "isSpecial": false
   },
   {
     "code": "ArrowUp",
@@ -474,7 +474,7 @@
     "ruKey": "↑",
     "ruShiftKey": "↑",
     "size": "s",
-    "special": true
+    "isSpecial": false
   },
   {
       "code": "ShiftRight",
@@ -483,7 +483,7 @@
       "ruKey": "Shift",
       "ruShiftKey": "Shift",
       "size": "xl",
-      "special": true
+      "isSpecial": true
   },
   {
       "code": "ControlLeft",
@@ -492,7 +492,7 @@
       "ruKey": "Ctrl",
       "ruShiftKey": "Ctrl",
       "size": "s",
-      "special": true
+      "isSpecial": true
   },
   {
       "code": "MetaLeft",
@@ -501,7 +501,7 @@
       "ruKey": "Win",
       "ruShiftKey": "Win",
       "size": "s",
-      "special": true
+      "isSpecial": true
   },
   {
       "code": "AltLeft",
@@ -510,7 +510,7 @@
       "ruKey": "Alt",
       "ruShiftKey": "Alt",
       "size": "s",
-      "special": true
+      "isSpecial": true
   },
   {
       "code": "Space",
@@ -519,7 +519,7 @@
       "ruKey": " ",
       "ruShiftKey": " ",
       "size": "space",
-      "special": true
+      "isSpecial": false
   },
   {
       "code": "AltRight",
@@ -528,7 +528,7 @@
       "ruKey": "Alt",
       "ruShiftKey": "Alt",
       "size": "s",
-      "special": true
+      "isSpecial": true
   },
   {
       "code": "ArrowLeft",
@@ -537,7 +537,7 @@
       "ruKey": "←",
       "ruShiftKey": "←",
       "size": "s",
-      "special": true
+      "isSpecial": false
   },
   {
       "code": "ArrowDown",
@@ -546,7 +546,7 @@
       "ruKey": "↓",
       "ruShiftKey": "↓",
       "size": "s",
-      "special": true
+      "isSpecial": false
   },
   {
       "code": "ArrowRight",
@@ -555,7 +555,7 @@
       "ruKey": "→",
       "ruShiftKey": "→",
       "size": "s",
-      "special": true
+      "isSpecial": false
   },
   {
     "code": "ControlRight",
@@ -564,6 +564,6 @@
     "ruKey": "Ctrl",
     "ruShiftKey": "Ctrl",
     "size": "s",
-    "special": true
+    "isSpecial": true
   }
 ]
