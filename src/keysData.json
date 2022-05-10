@@ -468,21 +468,21 @@
       "special": false
   },
   {
+    "code": "ArrowUp",
+    "engKey": "↑",
+    "engShiftKey": "↑",
+    "ruKey": "↑",
+    "ruShiftKey": "↑",
+    "size": "s",
+    "special": true
+  },
+  {
       "code": "ShiftRight",
       "engKey": "Shift",
       "engShiftKey": "Shift",
       "ruKey": "Shift",
       "ruShiftKey": "Shift",
-      "size": "m",
-      "special": true
-  },
-  {
-      "code": "ArrowUp",
-      "engKey": "↑",
-      "engShiftKey": "↑",
-      "ruKey": "↑",
-      "ruShiftKey": "↑",
-      "size": "s",
+      "size": "xl",
       "special": true
   },
   {
@@ -491,7 +491,7 @@
       "engShiftKey": "Ctrl",
       "ruKey": "Ctrl",
       "ruShiftKey": "Ctrl",
-      "size": "m",
+      "size": "s",
       "special": true
   },
   {
@@ -531,15 +531,6 @@
       "special": true
   },
   {
-      "code": "ControlRight",
-      "engKey": "Ctrl",
-      "engShiftKey": "Ctrl",
-      "ruKey": "Ctrl",
-      "ruShiftKey": "Ctrl",
-      "size": "m",
-      "special": true
-  },
-  {
       "code": "ArrowLeft",
       "engKey": "←",
       "engShiftKey": "←",
@@ -565,5 +556,14 @@
       "ruShiftKey": "→",
       "size": "s",
       "special": true
+  },
+  {
+    "code": "ControlRight",
+    "engKey": "Ctrl",
+    "engShiftKey": "Ctrl",
+    "ruKey": "Ctrl",
+    "ruShiftKey": "Ctrl",
+    "size": "s",
+    "special": true
   }
 ]

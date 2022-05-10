@@ -28,7 +28,7 @@ import keysData from "./keysData.json";
 // window.addEventListener("DOMContentLoaded", startCreateArr);
 
 
-const lineBreakLayout = ["Backspace", "Backslash", "Enter", "ArrowUp", "ArrowRight"];
+const lineBreakLayout = ["Backspace", "Backslash", "Enter", "ShiftRight", "ControlRight"];
 
 class Keyboard {
 
@@ -45,7 +45,7 @@ class Keyboard {
     };
 
     properties = {
-        textAreaValue: "",
+        // textAreaValue: "",
         language: "ru",
         capsLock: false,
         shift: false,
@@ -60,7 +60,7 @@ class Keyboard {
 
 
 
-  constructor (containerId, textareaSelector, keysData, lineBreakKeyCodes) {
+  constructor (containerId, textareaId, keysData, lineBreakKeyCodes) {
     this.data.keysDataArr = keysData;
     this.data.lineBreakArr = lineBreakKeyCodes;
 
@@ -73,9 +73,13 @@ class Keyboard {
     this.elements.keyboardContainer.classList.add("keyboard");
     this.elements.keyboardContainer.id = containerId;
     this.elements.keysContainer.classList.add("keyboard__keys", "keys-container");
-    this.elements.targetTextArea = document.querySelector(textareaSelector);
+    this.elements.targetTextArea = document.getElementById(textareaId);
 
     // this.elements.keys = this.elements.keysContainer.querySelectorAll(".keys-container_key");
+
+    // Setup properties
+    // this.properties.textAreaValue = this.elements.targetTextArea.value;
+
 
     // Add to DOM
     this.elements.keyboardContainer.appendChild(this.elements.keysContainer);
@@ -104,7 +108,10 @@ class Keyboard {
       fragment.appendChild(keyElement);
 
       if (insertLineBreak) {
-          fragment.appendChild(document.createElement("br"));
+          // fragment.appendChild(document.createElement("br"));
+          const lineBreakElement = document.createElement("div");
+          lineBreakElement.classList.add("line-break-item");
+          fragment.appendChild(lineBreakElement);
       }
     });
 
@@ -161,8 +168,18 @@ class Keyboard {
 
   setListenerForKey (keyElement) { 
     const keyData = this.getKeyData(keyElement);
+    if (keyData.special) {
+      switch(keyData.code) {
 
-    return;
+        case "Backspace":
+          keyElement.addEventListener("click", () => {
+            this.elements.targetTextArea.value = this.elements.targetTextArea.value.slice(0, -1);
+
+            this.elements.targetTextArea.value = this.elements.targetTextArea.value + "12345";
+          })
+      }
+    }
+
   }
 
   getKeyData (keyElement) {
@@ -175,5 +192,38 @@ class Keyboard {
   }
 }
 
+class TextArea {
 
-const RssKeyboard = new Keyboard("keyboard", "#textarea", keysData, lineBreakLayout);
+  rows = null;
+  cols = null;
+  id = null;
+  // value = "";
+
+
+  constructor (textareaId, rows, cols) {
+    this.id = textareaId;
+    this.rows = rows;
+    this.cols = cols;
+
+    const textAreaElement = document.createElement("textarea");
+    textAreaElement.setAttribute("rows", `${rows}`);
+    textAreaElement.setAttribute("cols", `${cols}`);
+    textAreaElement.id = textareaId;
+    textAreaElement.classList.add("textarea");
+
+    textAreaElement.addEventListener("input", () => {
+      // this.value = textAreaElement.value;
+      console.log(textAreaElement.value);
+    })
+
+    document.body.appendChild(textAreaElement);
+  }
+
+}
+
+const textArea = new TextArea("textarea", 5, 50);
+
+const RssKeyboard = new Keyboard("keyboard", "textarea", keysData, lineBreakLayout);
+
+
+alert("делаю прямо сейчас. осталось повесить обработчики сибытий. если не сложно, проверьте завтра-послезавтра");
