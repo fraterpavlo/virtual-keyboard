@@ -589,4 +589,15 @@ const textArea = new TextArea("textarea", 5, 50);
 const RssKeyboard = new Keyboard("keyboard", "textarea", keysData, lineBreakLayout);
 
 
-// alert("делаю прямо сейчас. осталось повесить обработчики сибытий. если не сложно, проверьте завтра-послезавтра");
+const taskName = document.createElement("h1");
+taskName.textContent = "Virtual-keyboard";
+
+const createdInWindows = document.createElement("p");
+createdInWindows.textContent = "Клавиатура создана в операционной системе Windows";
+
+const changeLanguageShortCut = document.createElement("p");
+changeLanguageShortCut.textContent = "Для переключения языка комбинация: левыe ctrl + alt. Двойной клик оставляет кнопки Shift Alt Ctrl активными";
+
+document.body.appendChild(taskName);
+document.body.appendChild(createdInWindows);
+document.body.appendChild(changeLanguageShortCut);
