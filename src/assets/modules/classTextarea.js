@@ -1,4 +1,4 @@
-class TextArea {
+export default class TextArea {
   rows = null;
 
   cols = null;
@@ -23,5 +23,3 @@ class TextArea {
     document.body.appendChild(textAreaElement);
   }
 }
-
-export default TextArea;

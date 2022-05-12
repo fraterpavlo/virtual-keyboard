@@ -1,7 +1,7 @@
 import './style.scss';
-import './keysData.json';
-import './assets/modules/classKeyboard';
-import './assets/modules/classTextarea';
+import keysData from './keysData.json';
+import Keyboard from './assets/modules/classKeyboard';
+import TextArea from './assets/modules/classTextarea';
 
 // function startCreateArr() {
 //   let input = document.querySelector("#kinput");

@@ -1,4 +1,4 @@
-class Keyboard {
+export default class Keyboard {
   elements = {
     keyboardContainer: null,
     keysContainer: null,
@@ -482,5 +482,3 @@ class Keyboard {
     localStorage.setItem('language', this.properties.language);
   }
 }
-
-export default Keyboard;
