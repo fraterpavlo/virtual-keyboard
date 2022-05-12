@@ -44,7 +44,6 @@ class Keyboard {
     eventHandlers = {
       onNotSpecialKeyHandler: this.onNotSpecialKeyListener.bind(this),
       onSpecialKeyHandler: this.onSpecialKeyListener.bind(this),
-
       onBackspaceHandler: this.onBackspaceListener.bind(this),
       onTabHandler: this.onTabListener.bind(this),
       onCapsLockHandler: this.onCapsLockListener.bind(this),
@@ -54,10 +53,8 @@ class Keyboard {
       onMetaLeftHandler: this.onMetaLeftListener.bind(this),
       onAltHandler: this.onAltListener.bind(this),
       onMousedownHandler: this.onMousedownListener.bind(this),
-      // onHandler: this.onListener.bind(this),
       onKeydownHandler: this.onKeydownListener.bind(this),
       onKeyupHandler: this.onKeyupListener.bind(this),
-      // onHandler: this.onListener.bind(this),
 
     };
 
@@ -71,7 +68,6 @@ class Keyboard {
     }
 
     properties = {
-        // textAreaValue: "",
         language: localStorage.getItem("language") || "ru",
         capsLock: false,
         shift: false,
@@ -103,7 +99,6 @@ class Keyboard {
     this.elements.targetTextArea = document.getElementById(textareaId);
 
     // Setup properties
-    // this.properties.textAreaValue = this.elements.targetTextArea.value;
 
 
     // Add to DOM
@@ -121,16 +116,6 @@ class Keyboard {
     document.body.addEventListener("keyup", this.eventHandlers.onKeyupHandler);
 
   }
-
-  // isSpecialKey (keyElement) {
-  //   const keysData = this.data.keysDataArr; //--
-  //   const keyCode = keyElement.getAttribute("data-code"); //--
-  //   const keyDataObj = keysData.find(dataObj => dataObj.code === keyCode); //--
-  //   const keyDataObj = getKeyDta(keyElement);
-  //   const isSpecialKey = keyDataObj.isSpecial;
-
-  //   return isSpecialKey;
-  // }
 
   createKeys (keysDataArr, lineBreakArr) {
     const fragment = document.createDocumentFragment();
@@ -185,33 +170,6 @@ class Keyboard {
     }
 
     keyElement.textContent = result;
-
-    // switch (language) {
-
-    //   case "ru":
-    //     if (isCapsLock && isShift) {
-    //       result = keyData.ruShiftKey.toLowerCase();
-    //     } else if (isCapsLock) {
-    //       result = keyData.ruKey.toUpperCase();
-    //     } else if (isShift) {
-    //       result = keyData.ruShiftKey;
-    //     } else {
-    //       result = keyData.ruKey;
-    //     }
-    //     break;
-
-    //     case "eng":
-    //       if (isCapsLock && isShift) {
-    //         result = keyData.engShiftKey.toLowerCase();
-    //       } else if (isCapsLock) {
-    //         result = keyData.engKey.toUpperCase();
-    //       } else if (isShift) {
-    //         result = keyData.engShiftKey;
-    //       } else {
-    //         result = keyData.engKey;
-    //       }
-    //       break;
-    // }
   }
 
   setListenerForKey (keyElement) { 
@@ -223,21 +181,16 @@ class Keyboard {
         case "Tab":
         case "CapsLock":
         case "Enter":
+        case "MetaLeft":
           keyElement.addEventListener("click", (e) => {
             return this.eventHandlers.onSpecialKeyHandler(e, keyData.code)
           });
         break;
-
+        
         case "ControlLeft":
         case "ControlRight":
-        case "MetaLeft":
         case "AltLeft":
         case "AltRight":
-          keyElement.addEventListener("dblclick", (e) => {
-            return this.eventHandlers.onSpecialKeyHandler(e, keyData.code)
-          });
-        break;
-        
         case "ShiftLeft":
         case "ShiftRight":
           keyElement.addEventListener("mousedown", (e) => {
@@ -247,44 +200,6 @@ class Keyboard {
             return this.eventHandlers.onSpecialKeyHandler(e, keyData.code)
           });
         break;
-
-
-
-
-        // case "Backspace":
-        //   keyElement.addEventListener("click", this.eventHandlers.onBackspaceHandler);
-        // break;
-
-        // case "Tab":
-        //   keyElement.addEventListener("click", this.eventHandlers.onTabHandler);
-        // break;
-
-        // case "CapsLock":
-        //   keyElement.addEventListener("click", this.eventHandlers.onCapsLockHandler);
-        // break;
-
-        // case "Enter":
-        //   keyElement.addEventListener("click", this.eventHandlers.onEnterHandler);
-        // break;
-
-        // case "ShiftLeft":
-        // case "ShiftRight":
-        //   keyElement.addEventListener("dblclick", this.eventHandlers.onShiftHandler);
-        // break;
-
-        // case "ControlLeft":
-        // case "ControlRight":
-        //   keyElement.addEventListener("dblclick", this.eventHandlers.onControlHandler);
-        // break;
-
-        // case "MetaLeft":
-        //   keyElement.addEventListener("dblclick", this.eventHandlers.onMetaLeftHandler);
-        // break;
-
-        // case "AltLeft":
-        // case "AltRight":
-        //   keyElement.addEventListener("dblclick", this.eventHandlers.onAltHandler);
-        // break;
       }
     } else {
       keyElement.addEventListener("click", this.eventHandlers.onNotSpecialKeyHandler);
@@ -329,17 +244,17 @@ class Keyboard {
   // }
 
   onBackspaceListener(event) {
-    event.preventDefault();
+    if (event.type === "keyup") return;
     this.elements.targetTextArea.value = this.elements.targetTextArea.value.slice(0, -1);
   }
 
   onTabListener (event) {
-    event.preventDefault();
+    if (event.type === "keyup") return;
     this.elements.targetTextArea.value += "\t";
   }
 
   onCapsLockListener (event, keyCode) {
-    event.preventDefault();
+    if (event.type === "keyup") return;
     this.properties.capsLock = !this.properties.capsLock;
     this.elements.notSpecialKeys.forEach(this.functions.setTextContentForKey);
 
@@ -351,121 +266,129 @@ class Keyboard {
   }
 
   onEnterListener (event) {
-    event.preventDefault();
+    if (event.type === "keyup") return;
     this.elements.targetTextArea.value += "\n";
   }
 
   onShiftListener (event, keyCode) {
-    event.preventDefault();
+    if (event.repeat) return;
     const currentKeyInDOM = this.elements.keysContainer.querySelector(`.key[data-code=${keyCode}]`);
     const shiftKeys = this.elements.keysContainer.querySelectorAll(".key[data-code=ShiftLeft], .key[data-code=ShiftRight]");
 
     this.properties.shift = !this.properties.shift;
     this.elements.notSpecialKeys.forEach(this.functions.setTextContentForKey);
+    
 
     if (event.type === "mousedown") {
       currentKeyInDOM.classList.add("active-lock");
       
-      document.addEventListener("mouseup", () => {
+      document.body.addEventListener("mouseup", () => {
         currentKeyInDOM.classList.remove("active-lock");
         this.properties.shift = !this.properties.shift;
         this.elements.notSpecialKeys.forEach(this.functions.setTextContentForKey);
       }, {once: true});
-    } else {
-      this.properties.shift 
-      ? currentKeyInDOM.classList.add("active-lock") 
-      : shiftKeys.forEach(el => el.classList.remove("active-lock"));
+
+    } else if (event.type === "dblclick") {
+      if (this.properties.shift) {
+        currentKeyInDOM.classList.add("active-lock");
+        this.functions.checkShortcut(keyCode);
+      } else {
+        shiftKeys.forEach(el => el.classList.remove("active-lock"));
+        this.properties.pressed.delete(keyCode);
+      }
     }
 
   }
 
   onControlListener (event, keyCode) {
-    event.preventDefault();
     this.properties.ctrl = !this.properties.ctrl;
-
 
     const currentKeyInDOM = this.elements.keysContainer.querySelector(`.key[data-code=${keyCode}]`);
     const ctrlKeys = this.elements.keysContainer.querySelectorAll(".key[data-code=ControlLeft], .key[data-code=ControlRight]");
 
-    this.properties.ctrl 
-      ? currentKeyInDOM.classList.add("active-lock") 
-      : ctrlKeys.forEach(el => el.classList.remove("active-lock"));
+    if (event.type === "mousedown") {
+      currentKeyInDOM.classList.add("active-lock");
+      
+      document.body.addEventListener("mouseup", () => {
+        currentKeyInDOM.classList.remove("active-lock");
+        this.properties.ctrl = !this.properties.ctrl;
+      }, {once: true});
 
-    // if (this.properties.ctrl) {
-    //   currentKeyInDOM.classList.add("active-lock");
-    //   this.functions.checkShortcut(keyCode);
-    // } else {
-    //   ctrlKeys.forEach(el => el.classList.remove("active-lock"));
-    //   this.properties.pressed.delete(keyCode);
-    // }
+    } else if (event.type === "dblclick") {
+      if (this.properties.ctrl) {
+        currentKeyInDOM.classList.add("active-lock");
+        this.functions.checkShortcut(keyCode);
+      } else {
+        ctrlKeys.forEach(el => el.classList.remove("active-lock"));
+        this.properties.pressed.delete(keyCode);
+      }
+    }
   }
 
   onMetaLeftListener (event, keyCode) {
-    event.preventDefault();
-    const currentKeyInDOM = this.elements.keysContainer.querySelector(`.key[data-code=${keyCode}]`);
-    currentKeyInDOM.classList.toggle("active-lock");
+    if (event.type === "keyup") return;
+    console.log("meta event");
+    // const currentKeyInDOM = this.elements.keysContainer.querySelector(`.key[data-code=${keyCode}]`);
+    // currentKeyInDOM.classList.toggle("active-lock");
   }
 
   onAltListener (event, keyCode) {
-    event.preventDefault();
     this.properties.alt = !this.properties.alt;
 
     const currentKeyInDOM = this.elements.keysContainer.querySelector(`.key[data-code=${keyCode}]`);
     const altKeys = this.elements.keysContainer.querySelectorAll(".key[data-code=AltLeft], .key[data-code=AltRight]");
 
-    // if (this.properties.alt) {
-    //   currentKeyInDOM.classList.add("active-lock");
-    //   this.functions.checkShortcut(keyCode);
-    // } else {
-    //   altKeys.forEach(el => el.classList.remove("active-lock"));
-    //   this.properties.pressed.delete(keyCode);
-    // }
+    if (event.type === "mousedown") {
+      currentKeyInDOM.classList.add("active-lock");
+      
+      document.body.addEventListener("mouseup", () => {
+        currentKeyInDOM.classList.remove("active-lock");
+        this.properties.alt = !this.properties.alt;
+      }, {once: true});
 
-    this.properties.alt 
-      ? currentKeyInDOM.classList.add("active-lock") 
-      : altKeys.forEach(el => el.classList.remove("active-lock"));
+    } else if (event.type === "dblclick") {
+      if (this.properties.alt) {
+        currentKeyInDOM.classList.add("active-lock");
+        this.functions.checkShortcut(keyCode);
+      } else {
+        altKeys.forEach(el => el.classList.remove("active-lock"));
+        this.properties.pressed.delete(keyCode);
+      }
+    }
   }
 
   onSpecialKeyListener(event, keyCode) {
+    event.preventDefault()
 
-    if (event.type === "click" || event.type === "keydown") {
-
-      switch (keyCode) {
-        case "Backspace":
-          this.eventHandlers.onBackspaceHandler(event);
-        break;
-        case "Tab":
-          this.eventHandlers.onTabHandler(event);
-        break;
-        case "Enter":
-          this.eventHandlers.onEnterHandler(event);
-        break;
-        case "CapsLock":
-          this.eventHandlers.onCapsLockHandler(event, keyCode);
-        break;
-      }
-
-    } else if (event.type === "dblclick" || event.type === "keydown" || event.type === "mousedown") {
-
-      switch (keyCode) {
-        case "ShiftLeft":
-        case "ShiftRight": 
-          this.eventHandlers.onShiftHandler(event, keyCode);
-        break;
-        case "ControlLeft":
-        case "ControlRight":
-          this.eventHandlers.onControlHandler(event, keyCode);
-        break;
-        case "AltLeft":
-        case "AltRight":
-          this.eventHandlers.onAltHandler(event, keyCode);
-        break;
-        case "MetaLeft":
-          this.eventHandlers.onMetaLeftHandler(event, keyCode);
-        break;
-      }
+    switch (keyCode) {
+      case "Backspace":
+        this.eventHandlers.onBackspaceHandler(event);
+      break;
+      case "Tab":
+        this.eventHandlers.onTabHandler(event);
+      break;
+      case "Enter":
+        this.eventHandlers.onEnterHandler(event);
+      break;
+      case "CapsLock":
+        this.eventHandlers.onCapsLockHandler(event, keyCode);
+      break;
+      case "MetaLeft":
+        this.eventHandlers.onMetaLeftHandler(event, keyCode);
+      break;
+      case "ShiftLeft":
+      case "ShiftRight": 
+        this.eventHandlers.onShiftHandler(event, keyCode);
+      break;
+      case "ControlLeft":
+      case "ControlRight":
+        this.eventHandlers.onControlHandler(event, keyCode);
+      break;
+      case "AltLeft":
+      case "AltRight":
+        this.eventHandlers.onAltHandler(event, keyCode);
+      break;
     }
-
   }
 
   onNotSpecialKeyListener (event) {
@@ -501,12 +424,6 @@ class Keyboard {
 
     function toggleActive (e) {
       e.currentTarget.classList.toggle("active");
-
-      // const isSpecialKey = e.currentTarget.classList.contains("key_special");
-      // if (!isSpecialKey) return;
-
-      // const keyCode = e.currentTarget.getAttribute("data-code");
-      // this.functions.togglePropertiesOfThis(keyCode);
     }
   }
 
@@ -522,15 +439,19 @@ class Keyboard {
     isSpecialKey 
       ? this.eventHandlers.onSpecialKeyHandler(event, keyCode)
       : this.eventHandlers.onNotSpecialKeyHandler(event);
-
   }
 
   onKeyupListener (event) {
+    document.body.addEventListener("keyup", this.eventHandlers.onKeyupHandler, {once: true});
     const keyCode = event.code;
     const currentKeyInDOM = this.elements.keysContainer.querySelector(`.key[data-code=${keyCode}]`);
+    if (!currentKeyInDOM) return;
 
-    if (currentKeyInDOM) currentKeyInDOM.classList.remove("active");
+    currentKeyInDOM.classList.remove("active");
     this.properties.pressed.delete(keyCode);
+
+    const isSpecialKey = currentKeyInDOM.classList.contains("key_special");
+    if (isSpecialKey) this.eventHandlers.onSpecialKeyHandler(event, keyCode);
   }
 
   checkShortcut(keyCode) {
@@ -561,7 +482,6 @@ class TextArea {
   rows = null;
   cols = null;
   id = null;
-  // value = "";
 
 
   constructor (textareaId, rows, cols) {
